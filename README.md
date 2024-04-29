@@ -25,27 +25,16 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 def linear_regression(X1,y,learning_rate=0.01,num_iters=1000):
-    #add a column to  x for the interccept
     X=np.c_[np.ones(len(X1)),X1]
-    
-    #initialize trhe Theeta
     theta=np.zeros(X.shape[1]).reshape(-1,1)
-    
-    #perform gradient descent
     for _ in range(num_iters):
         predictions=(X).dot(theta).reshape(-1,1)
-        
-        #calculate errors
         errors=(predictions-y).reshape(-1,1)
-        
-        #uptade theta using gradient descent
-        theta_=learning_rate*(1/len(X1))*X.T.dot(errors)
-        pass
+        theta-=learning_rate*(1/len(X1))*X.T.dot(errors)
     return theta
 data=pd.read_csv('50_Startups.csv',header=None)
 print(data.head())
 
-#assuming the last column is ur target variable 'y' and the preceeding column
 X=(data.iloc[1:, :-2].values)
 print(X)
 X1=X.astype(float)
@@ -57,40 +46,42 @@ Y1_Scaled=scaler.fit_transform(y)
 print(X1_Scaled)
 print(Y1_Scaled)
 
-#learn model parameters
 theta=linear_regression(X1_Scaled,Y1_Scaled)
 
-#predict target value for a new data point
 new_data=np.array([165349.2,136897.8,471784.1]).reshape(-1,1)
 new_Scaled=scaler.fit_transform(new_data)
 prediction=np.dot(np.append(1,new_Scaled),theta)
 prediction=prediction.reshape(-1,1)
 pre=scaler.inverse_transform(prediction)
 print(f"Predicted value: {pre}")
-
-        
-
 */
 ```
 
 
 ## Output:
 
-### X&Y values:
-
-![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/fd6bb9aa-425a-4819-bed6-51c6ba29a0ce)
-![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/223b16f2-ee3d-49b2-9912-e3e19e404f1f)
+### Data:
+![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/a12d07f8-5d30-4121-8a97-ca6b4a997153)
 
 
-### X-Scaled & Y-Scaled:
+### X values:
 
-![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/5dad4c50-9f7b-4f9a-b46f-ba5ebeaccdd1)
+![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/8fb412ef-196a-4e19-9cd1-f29f2016afa0)
 
-![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/abec740a-5f42-4a67-8f45-69201b7f221a)
+### Y values:
+
+![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/2d41fc4c-74bc-49bd-8c08-1994fc0638a0)
+
+### X scaled:
+![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/333a162c-af3d-4899-9e50-6f33671101b4)
+
+### Y scaled:
+
+![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/d983846a-f309-4b6b-99a9-728d39906ea1)
 
 ### Predicted value:
 
-![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/03525478-0253-435c-b9c2-63c0a885c3de)
+![image](https://github.com/Anandanaruvi/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/120443233/36d93dbf-088c-4f8e-9dd3-90d244ffb96b)
 
 ## Result:
 
